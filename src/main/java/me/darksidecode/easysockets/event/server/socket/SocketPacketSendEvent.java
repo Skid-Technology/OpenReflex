@@ -1,0 +1,22 @@
+package me.darksidecode.easysockets.event.server.socket;
+
+import java.net.Socket;
+import me.darksidecode.easysockets.event.EventState;
+import me.darksidecode.easysockets.protocol.packet.Packet;
+
+public class SocketPacketSendEvent extends SocketEvent {
+   private Packet packet;
+
+   public SocketPacketSendEvent(EventState state, Socket socket, Packet packet) {
+      super(state, socket);
+      this.packet = packet;
+   }
+
+   public Packet getPacket() {
+      return this.packet;
+   }
+
+   public void setPacket(Packet packet) {
+      this.packet = packet;
+   }
+}

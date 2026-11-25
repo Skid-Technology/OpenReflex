@@ -1,0 +1,125 @@
+{
+  "classes": [
+    {
+      "version": 52,
+      "access": 33,
+      "name": "org/spigotmc/SpigotConfig",
+      "superName": "java/lang/Object",
+      "fields": [
+        {
+          "access": 9,
+          "name": "unknownCommandMessage",
+          "descriptor": "Ljava/lang/String;"
+        },
+        {
+          "access": 9,
+          "name": "bungee",
+          "descriptor": "Z"
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V"
+        }
+      ]
+    },
+    {
+      "version": 52,
+      "access": 33,
+      "name": "org/spigotmc/AsyncCatcher",
+      "superName": "java/lang/Object",
+      "fields": [
+        {
+          "access": 9,
+          "name": "enabled",
+          "descriptor": "Z"
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "access": 9,
+          "name": "catchOp",
+          "descriptor": "(Ljava/lang/String;)V"
+        }
+      ]
+    },
+    {
+      "version": 52,
+      "access": 33,
+      "name": "us/myles/ViaVersion/api/Via",
+      "superName": "java/lang/Object",
+      "methods": [
+        {
+          "access": 9,
+          "name": "getAPI",
+          "descriptor": "()Lus/myles/ViaVersion/api/ViaAPI;"
+        }
+      ]
+    },
+    {
+      "version": 52,
+      "access": 1537,
+      "name": "us/myles/ViaVersion/api/ViaAPI",
+      "superName": "java/lang/Object",
+      "methods": [
+        {
+          "access": 1025,
+          "name": "getPlayerVersion",
+          "descriptor": "(Ljava/util/UUID;)I"
+        }
+      ]
+    },
+    {
+      "version": 52,
+      "access": 33,
+      "name": "us/myles/ViaVersion/api/protocol/ProtocolVersion",
+      "superName": "java/lang/Object",
+      "fields": [
+        {
+          "access": 25,
+          "name": "v1_8",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        },
+        {
+          "access": 25,
+          "name": "v1_9",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        },
+        {
+          "access": 25,
+          "name": "v1_10",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        },
+        {
+          "access": 25,
+          "name": "v1_11",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        },
+        {
+          "access": 25,
+          "name": "v1_12",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        },
+        {
+          "access": 25,
+          "name": "v1_13",
+          "descriptor": "Lus/myles/ViaVersion/api/protocol/ProtocolVersion;"
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "getId",
+          "descriptor": "()I"
+        }
+      ]
+    }
+  ]
+}

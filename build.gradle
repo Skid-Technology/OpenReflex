@@ -1,0 +1,116 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+}
+
+group = 'rip.reflex'
+version = '10.10-2-56528ba'
+
+def javaVersion = 8
+
+repositories {
+    mavenCentral()
+    maven { url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/') }
+    maven { url = uri('https://repo.dmulloy2.net/repository/public/') }
+    maven { url = uri('https://repo.extendedclip.com/content/repositories/placeholderapi/') }
+}
+
+configurations {
+    apiGenerator
+}
+
+def generatorClasses = layout.buildDirectory.dir('api-generator/classes')
+tasks.register('compileApiGenerator', JavaCompile) {
+    source = files('gradle/GenerateCompileApis.java')
+    classpath = configurations.apiGenerator
+    destinationDirectory = generatorClasses
+    javaCompiler = javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(javaVersion) }
+    options.encoding = 'UTF-8'
+}
+
+tasks.register('generateCompileApis', JavaExec) {
+    group = 'build setup'
+    description = 'Generates compile-only API headers from text declarations.'
+    dependsOn tasks.named('compileApiGenerator')
+    inputs.dir('gradle/api-signatures')
+    outputs.dir(layout.buildDirectory.dir('compile-apis'))
+    classpath = files(generatorClasses) + configurations.apiGenerator
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(javaVersion) }
+    mainClass = 'GenerateCompileApis'
+    args file('gradle/api-signatures').absolutePath, layout.buildDirectory.dir('compile-apis').get().asFile.absolutePath
+}
+
+def compileApi = { String name ->
+    files(layout.buildDirectory.file("compile-apis/${name}.jar")).builtBy(tasks.named('generateCompileApis'))
+}
+
+tasks.register('prepareIde') {
+    group = 'ide'
+    description = 'Generates the compile-only API headers used by the IDE import.'
+    dependsOn tasks.named('generateCompileApis')
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+    withSourcesJar()
+}
+
+dependencies {
+    apiGenerator 'org.ow2.asm:asm:9.8'
+    apiGenerator 'com.google.code.gson:gson:2.10.1'
+
+    compileOnly compileApi('reflex')
+    compileOnly('org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT') {
+        exclude group: 'net.md-5', module: 'bungeecord-chat'
+    }
+    compileOnly 'net.md-5:bungeecord-chat:1.16-R0.4'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:4.4.0'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+    compileOnly 'org.mongodb:mongo-java-driver:3.12.14'
+    compileOnly 'com.google.guava:guava:21.0'
+    compileOnly 'com.google.code.gson:gson:2.8.9'
+    compileOnly 'commons-codec:commons-codec:1.11'
+    compileOnly 'commons-io:commons-io:2.4'
+    compileOnly 'commons-lang:commons-lang:2.6'
+    compileOnly 'org.apache.httpcomponents:httpcore:4.4.16'
+    compileOnly 'org.bouncycastle:bcprov-jdk18on:1.78.1'
+    compileOnly 'com.googlecode.json-simple:json-simple:1.1.1'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (name != 'compileApiGenerator') {
+        dependsOn tasks.named('generateCompileApis')
+    }
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:none', '-Xmaxerrs', '1000']
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'OpenReflex',
+                'Implementation-Version': project.version)
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+eclipse {
+    classpath {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

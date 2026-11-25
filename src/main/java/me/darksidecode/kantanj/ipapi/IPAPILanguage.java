@@ -1,0 +1,28 @@
+package me.darksidecode.kantanj.ipapi;
+
+public enum IPAPILanguage {
+   ENGLISH("en", "English (default)"),
+   GERMAN("de", "Deutsch (German)"),
+   SPANISH("es", "Español (Spanish)"),
+   PORTUGUESE("pt-BR", "Español - Argentina (Spanish)"),
+   FRENCH("fr", "Français (French)"),
+   JAPANESE("ja", "日本語 (Japanese)"),
+   CHINESE("zh-CN", "中国 (Chinese)"),
+   RUSSIAN("ru", "Русский (Russian)");
+
+   private final String iso639Name;
+   private final String description;
+
+   private IPAPILanguage(String iso639Name, String description) {
+      this.iso639Name = iso639Name;
+      this.description = description;
+   }
+
+   public String getIso639Name() {
+      return this.iso639Name;
+   }
+
+   public String getDescription() {
+      return this.description;
+   }
+}

@@ -1,0 +1,90 @@
+##################################################################################
+#
+#   Hello,
+#
+#   Please do not change anything in Reflex's plugin.yml (this file).
+# Modifying it may lead to unexpected plugin behavior of any kind, including
+# random console errors, checks not working [properly], etc.
+#
+#   Contact us if you have any questions. (Discord: https://g.reflex.rip/discord)
+#
+#   With love, Reflex Development Team.
+#   © reflex.rip, 2016-2019.
+#
+##################################################################################
+
+
+name: Reflex
+main: rip.reflex.Reflex
+version: 10.10-2-56528ba
+authors: [DarksideCode, sinnlosername]
+softdepend: [ProtocolLib, LibsForPaper, ReflexMoonlightLibs, PlaceholderAPI]
+description: The next generation cheat elimination
+website: https://g.reflex.rip/spigot
+api-version: 1.13
+commands:
+  reflex:
+    description: Reflex commands
+permissions:
+  reflex.command.reflex:
+    default: true
+  reflex.command.help:
+    default: op
+  reflex.command.kick:
+    default: op
+  reflex.command.ban:
+    default: op
+  reflex.command.unban:
+    default: op
+  reflex.command.verbose:
+    default: op
+  reflex.command.delay:
+    default: op
+  reflex.command.broadcast:
+    default: op
+  reflex.command.reload:
+    default: op
+  reflex.command.setdb:
+    default: op
+  reflex.command.notify:
+    default: op
+  reflex.command.tps:
+    default: op
+  reflex.command.bypass:
+    default: op
+  reflex.command.timings:
+    default: op
+  reflex.command.debug:
+    default: op
+  reflex.command.reset:
+    default: op
+  reflex.command.dump:
+    default: op
+  reflex.command.packetdebug:
+    default: op
+  reflex.verbose:
+    default: op
+  reflex.notify:
+    default: op
+  reflex.bypass:
+    default: false
+  reflex.bypass.killaura:
+    default: false
+  reflex.bypass.criticals:
+    default: false
+  reflex.bypass.badpackets:
+    default: false
+  reflex.bypass.antiknockback:
+    default: false
+  reflex.bypass.blockactions:
+    default: false
+  reflex.bypass.clientcontrol:
+    default: false
+  reflex.bypass.invactions:
+    default: false
+  reflex.bypass.speed:
+    default: false
+  reflex.bypass.vehiclemove:
+    default: false
+  reflex.bypass.elytramove:
+    default: false
